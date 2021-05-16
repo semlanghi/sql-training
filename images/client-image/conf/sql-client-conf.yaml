@@ -68,6 +68,82 @@ tables:
       property-version: 1
       type: json
       schema: "ROW(rideId LONG, isStart BOOLEAN, eventTime TIMESTAMP, lon FLOAT, lat FLOAT, psgCnt INT, taxiId LONG)"
+  - name: Passages
+    type: source
+    update-mode: append
+    schema:
+    - name: senderId
+      type: LONG
+    - name: receiverId
+      type: LONG
+    - name: actionId
+      type: LONG
+    - name: gameId
+      type: LONG
+    - name: gameTime
+      type: TIMESTAMP
+      rowtime:
+        timestamps:
+          type: "from-field"
+          from: "eventTime"
+        watermarks:
+          type: "periodic-bounded"
+          delay: "60000"
+    connector:
+      property-version: 1
+      type: kafka
+      version: universal
+      topic: Passages
+      startup-mode: earliest-offset
+      properties:
+      - key: zookeeper.connect
+        value: zookeeper:2181
+      - key: bootstrap.servers
+        value: kafka:9092
+      - key: group.id
+        value: testGroup
+    format:
+      property-version: 1
+      type: json
+      schema: "ROW(senderId LONG, receiverId LONG, actionId LONG, gameId LONG, eventTime TIMESTAMP)"
+  - name: Shots
+    type: source
+    update-mode: append
+    schema:
+    - name: playerId
+      type: LONG
+    - name: isMade
+      type: BOOLEAN
+    - name: actionId
+      type: LONG
+    - name: gameId
+      type: LONG
+    - name: gameTime
+      type: TIMESTAMP
+      rowtime:
+        timestamps:
+          type: "from-field"
+          from: "eventTime"
+        watermarks:
+          type: "periodic-bounded"
+          delay: "60000"
+    connector:
+      property-version: 1
+      type: kafka
+      version: universal
+      topic: Shots
+      startup-mode: earliest-offset
+      properties:
+      - key: zookeeper.connect
+        value: zookeeper:2181
+      - key: bootstrap.servers
+        value: kafka:9092
+      - key: group.id
+        value: testGroup
+    format:
+      property-version: 1
+      type: json
+      schema: "ROW(playerId LONG, isMade BOOLEAN, actionId LONG, gameId LONG, eventTime TIMESTAMP)"
   - name: Fares
     type: source
     update-mode: append
@@ -142,6 +218,45 @@ tables:
       property-version: 1
       type: json
       schema: "ROW(eventTime TIMESTAMP, taxiId LONG, driverId LONG)"
+  - name: Substitutions
+    type: source
+    update-mode: append
+    schema:
+    - name: playerId
+      type: LONG
+    - name: playerName
+      type: STRING
+    - name: substitutionTime
+      type: TIMESTAMP
+      rowtime:
+        timestamps:
+          type: "from-field"
+          from: "eventTime"
+        watermarks:
+          type: "periodic-bounded"
+          delay: "60000"
+    connector:
+      property-version: 1
+      type: kafka
+      version: universal
+      topic: Substitutions
+      startup-mode: earliest-offset
+      properties:
+      - key: zookeeper.connect
+        value: zookeeper:2181
+      - key: bootstrap.servers
+        value: kafka:9092
+      - key: group.id
+        value: testGroup
+    format:
+      property-version: 1
+      type: json
+      schema: "ROW(eventTime TIMESTAMP, playerId LONG, playerName STRING)"
+  - name: Players
+    type: temporal-table
+    history-table: Substitutions
+    primary-key: playerId
+    time-attribute: substitutionTime
   - name: Drivers
     type: temporal-table
     history-table: DriverChanges
@@ -152,6 +267,12 @@ functions:
 - name: isInNYC
   from: class
   class: com.ververica.sql_training.udfs.IsInNYC
+- name: isGameInNYC
+  from: class
+  class: com.ververica.sql_training.udfs.IsGameInNYC
+- name: team
+  from: class
+  class: com.ververica.sql_training.udfs.Team
 - name: toAreaId
   from: class
   class: com.ververica.sql_training.udfs.ToAreaId

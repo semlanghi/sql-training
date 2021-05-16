@@ -2,7 +2,7 @@ version: '2.1'
 services:
   sql-client:
     build: ./images/client-image
-    command: "java -classpath /opt/data/data-producer.jar com.ververica.sql_training.data_producer.TaxiRecordProducer --input file /opt/data --output kafka kafka:9092 --speedup 10.0"
+    command: "java -classpath /opt/data/data-producer.jar com.ververica.sql_training.data_producer.BasketBallRecordProducer --input file /opt/data --output kafka kafka:9092 --speedup 5.0"
     depends_on:
       - kafka
       - jobmanager
@@ -50,7 +50,7 @@ services:
       KAFKA_ADVERTISED_PORT: "9092"
       HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "Rides:1:1, Fares:1:1, DriverChanges:1:1"
+      KAFKA_CREATE_TOPICS: "Rides:1:1, Fares:1:1, DriverChanges:1:1, Passages:1:1, Shots:1:1, Substitutions:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   mysql:

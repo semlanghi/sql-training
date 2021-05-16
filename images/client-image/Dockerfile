@@ -62,7 +62,10 @@ RUN wget -P /opt/sql-client/lib/ https://repo.maven.apache.org/maven2/org/apache
 # Download data files
     wget -O /opt/data/driverChanges.txt.gz 'https://drive.google.com/uc?export=download&id=1pf4tfv-YpoVQ9_O0948M8oXeCfVH-0MH'; \
     wget -O /opt/data/fares.txt.gz 'https://drive.google.com/uc?export=download&id=1SriiwcIdMvY7uJsWSY4Hhh32iO3F4ND2'; \
-    wget -O /opt/data/rides.txt.gz 'https://drive.google.com/uc?export=download&id=1gY8W07OFvB7_4lHlAyingM4WQzs0_8lT';
+    wget -O /opt/data/rides.txt.gz 'https://drive.google.com/uc?export=download&id=1gY8W07OFvB7_4lHlAyingM4WQzs0_8lT'; \
+    wget -O /opt/data/passages.txt.gz 'https://drive.google.com/uc?export=download&id=1jHb7KQtWdXx-ABpSvzR4y-gqVYQLC0ij'; \
+    wget -O /opt/data/shots.txt.gz 'https://drive.google.com/uc?export=download&id=1g1S4RBXBye0Tyu7iMDFUfV0kruB_EQ2r'; \
+    wget -O /opt/data/substitutions.txt.gz 'https://drive.google.com/uc?export=download&id=1eQ5kcF6TRNSld3Sf8TUSA2hjJKT4xBcx';
 
 # Copy configuration
 COPY conf/* /opt/flink/conf/
