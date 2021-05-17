@@ -11,13 +11,9 @@ The assignment will cover:
 - Grouping and Windowing 
 - Joins
 
-Please find the [training instructions](https://github.com/ververica/sql-training/wiki) in the Wiki of this repository.
-
 ### Requirements
 
-The training is based on Flink's SQL CLI client and uses Docker Compose to setup the training environment.
-
-You **only need [Docker](https://www.docker.com/)** to run this training. </br>
+You **only need [Docker](https://www.docker.com/)** to run this assignment. </br>
 You don't need Java, Scala, or an IDE.
 
 ### Setting Up the Environment 
