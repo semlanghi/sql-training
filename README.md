@@ -49,17 +49,33 @@ Two NBA games are held in the related cities. The NBA enabled the tracking of th
 
 The query should return the stream of Passages from the Lakers team. 
 
+```sql
+# Write your solution here
+```
+
 ### Query 2
 
 The query should return the number of lost balls (wrong passages), per each team. 
+
+```sql
+# Write your solution here
+```
 
 ### Query 3 
 
 The query should return the average number of shots made across the four quarters, per each team. Every quarter of the game is 12 minutes (assume no break between quarters). 
 
+```sql
+# Write your solution here
+```
+
 ### Query 4 
 
 The query should return the number of assists (passages immediately before a made shot) per each team. Assume in this case, that no player touches the ball more than once in the same action. 
+
+```sql
+# Write your solution here
+```
 
 ### Query 5
 
@@ -67,9 +83,17 @@ The query should return the number of points per each player, reporting the play
 
 N.B.: for the purpose of this query, consider the stream of Substitution *finite*.
 
+```sql
+# Write your solution here
+```
+
 ### Optional (Query 4 Refinement)
 
 The query should return the first and last passages of a successful action, i.e., a series of passages followed by a made shot. 
+
+```sql
+# Write your solution here
+```
 
 
 
