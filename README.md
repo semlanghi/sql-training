@@ -31,8 +31,12 @@ You don't need Java, Scala, or an IDE.
   set COMPOSE_CONVERT_WINDOWS_PATHS=1
   docker-compose up -d
   ```
-3. It may happen that the sql-client container stops abruptly. If that happens, stops the docker compose with `docker-compose down`, and reset it with `docker-compose up -d`
-4. To finally stop the docker compose
+3. Start the sql-client 
+  ```bash
+  docker-compose exec sql-client ./sql-client.sh
+  ```
+5. It may happen that the sql-client container stops abruptly. If that happens, stops the docker compose with `docker-compose down`, and reset it with `docker-compose up -d`, and then again `docker-compose exec sql-client ./sql-client.sh`
+6. To finally stop the docker compose
   ```bash 
   docker-compose down
   ```
