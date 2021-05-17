@@ -1,6 +1,5 @@
 # Apache Flink® SQL Assignment
 
-**This repository provides a training for Flink's SQL API.**
 
 **This repository contains the Flink SQL Assignment.**
 
